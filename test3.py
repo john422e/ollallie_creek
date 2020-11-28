@@ -4,7 +4,7 @@ from time import sleep
 GPIO.setwarnings(False)
 GPIO.setmode(BCM)
 
-button = 16
+button = 23
 led = 18
 
 GPIO.setup(button, GPIO.IN, pull_updown=GPIO.PUD_UP)
