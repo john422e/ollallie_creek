@@ -13,3 +13,7 @@ GPIO.setup(led, GPIO.OUT)
 GPIO.output(led, GPIO.HIGH)
 sleep(3)
 GPIO.output(led, GPIO.LOW)
+
+while True:
+    if GPIO.input(button) == GPIO.HIGH:
+        print("BUTTON PRESS")
