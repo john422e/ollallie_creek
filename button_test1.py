@@ -8,7 +8,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-while(true):
+while(True):
     if GPIO.input(button_pin):
         print("BUTTON PRESS")
     time.sleep(0.25)
