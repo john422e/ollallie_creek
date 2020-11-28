@@ -9,6 +9,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 while(true):
-    if GPIO.input(butPin):
+    if GPIO.input(buttonPin):
         print("BUTTON PRESS")
     time.sleep(0.25)
