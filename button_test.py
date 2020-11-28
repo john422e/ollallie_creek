@@ -22,7 +22,7 @@ def button_callback(channel):
 #callback_lambda = lambda x: button_callback(x, button_state)
 
 
-# initialize
+# initialize min
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM) # use physical pin numbers
 # set button_pin to be input and set inital value to be pulled low
