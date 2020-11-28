@@ -1,3 +1,4 @@
+import os
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -14,6 +15,7 @@ def button_callback(channel):
         print("LIGHT ON")
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
+	os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
     else:
         print("LIGHT OFF")
         GPIO.output(led_pin, GPIO.LOW)
@@ -39,5 +41,9 @@ sleep(1)
 # setup event on pin 10 rising edge
 GPIO.add_event_detect(button_pin, GPIO.RISING, callback=button_callback, bouncetime=200)
 
-message = input("Press enter to quit \n\n") # run until someone presses enter
+time = 1
+while time < 60:
+	sleep(1)
+	time += 1
+#message = input("Press enter to quit \n\n") # run until someone presses enter
 GPIO.cleanup() # cleanup
