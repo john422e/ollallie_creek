@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 button = 16
 led = 18
 
-GPIO.setup(button, GPIO.IN, pull_updown=GPIO.PUD_UP)
+GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(led, GPIO.OUT)
 
 GPIO.output(led, GPIO.HIGH)
