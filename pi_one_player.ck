@@ -85,21 +85,21 @@ fun void get_reading()
                     //<<< "sound on!" >>>;
                     1 => soundOn;
                     freqs1[index-1] => s.freq;
-                    amps[index-1] => targetGain; // index-1?
+                    amps[index-1] => s.gain; // index-1?
                     spork ~ e.keyOn();
                 }
                 else if ( msg.getFloat(0) < thresh2 && msg.getFloat(0) > 0.0)
                 {
-                    //<<< "sound on!" >>>;
-                    1 => soundOn;
-                    freqs2[index-1] => s.freq;
-                    amps[index-1]*0.5 => targetGain;
-                    spork ~ e.keyOn();
+                    <<< "sound on!" >>>;
+                    //1 => soundOn;
+                    //freqs2[index-1] => s.freq;
+                    //amps[index-1]*0.5 => targetGain;
+                    //spork ~ e.keyOn();
                 }   
                 else
                 {
                     0 => soundOn;
-                    0.0 => targetGain;
+                    0.0 => s.gain;
                     spork ~ e.keyOff();
                 }
             }
