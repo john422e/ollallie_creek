@@ -1,19 +1,23 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+def button_callback(channel):
+    print("BUTTON PRESS")
 
 button = 16
 led = 18
 
-GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(led, GPIO.OUT)
+GPIO.add_event_detect(button, GPIO.RISING, callback=button_callback)
+
+message = input("Press enter to quit \n")
+GPIO.cleanup()
+
 
 GPIO.output(led, GPIO.HIGH)
 sleep(3)
 GPIO.output(led, GPIO.LOW)
-
-while True:
-    if GPIO.input(button) == GPIO.HIGH:
-        print("BUTTON PRESS")
