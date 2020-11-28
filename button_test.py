@@ -15,7 +15,7 @@ def button_callback(channel):
         print("LIGHT ON")
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
-	os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
+        os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
     else:
         print("LIGHT OFF")
         GPIO.output(led_pin, GPIO.LOW)
