@@ -68,6 +68,28 @@ times[index] => second_i; // sets second_i from index
 0.005 => float gainInc;
 
 // functions
+fun void fadeIn()
+{
+    while( gainPosition <= targetGain )
+    {
+        gainPosition + gainInc => gainPosition;
+        gainPosition => s.gain;
+        //<<< gainPosition >>>;
+        10::ms => now;
+    }
+    //<<< "end" >>>;
+}
+
+fun void fadeOut()
+{
+    while( gainPosition > 0.0 )
+    {
+        gainPosition - gainInc => gainPosition;
+        gainPosition => s.gain;
+        10::ms => now;
+    }
+}
+
 fun void get_reading()
 {
     while( second_i <= end )
@@ -86,7 +108,7 @@ fun void get_reading()
                     1 => soundOn;
                     freqs1[index-1] => s.freq;
                     amps[index-1] => targetGain; // index-1?
-                    spork ~ e.keyOn();
+                    spork ~ fadeIn();
                 }
                 else if ( msg.getFloat(0) < thresh2 && msg.getFloat(0) > 0.0)
                 {
@@ -94,13 +116,13 @@ fun void get_reading()
                     1 => soundOn;
                     freqs2[index-1] => s.freq;
                     amps[index-1]*0.5 => targetGain;
-                    spork ~ e.keyOn();
+                    spork ~ fadeIn();
                 }   
                 else
                 {
                     0 => soundOn;
                     0.0 => targetGain;
-                    spork ~ e.keyOff();
+                    spork ~ fadeOut();
                 }
             }
         }

@@ -19,7 +19,20 @@ SinOsc s => dac;
 dac.gain(0.9); // is this too high?
 
 // initialize volume
-0 => s.gain;
+//0 => s.gain;
+
+// startup sound
+5 => int countDown;
+
+0.2 => s.gain;
+for( 0 => int i; i < countDown; i++ ) {
+    220 => s.freq;
+    e.keyOn();
+    0.5::second => now;
+    e.keyOff();
+    0.5::second => now;
+}
+1.0 => s.gain;
 
 // GLOBAL VARIABLES
 
@@ -56,28 +69,6 @@ times[index] => second_i; // sets second_i from index
 0.005 => float gainInc;
 
 // functions
-fun void fadeIn()
-{
-    while( gainPosition <= targetGain )
-    {
-        gainPosition + gainInc => gainPosition;
-        gainPosition => s.gain;
-        //<<< gainPosition >>>;
-        10::ms => now;
-    }
-    //<<< "end" >>>;
-}
-
-fun void fadeOut()
-{
-    while( gainPosition > 0.0 )
-    {
-        gainPosition - gainInc => gainPosition;
-        gainPosition => s.gain;
-        10::ms => now;
-    }
-}
-
 fun void get_reading()
 {
     while( second_i <= end )
@@ -96,7 +87,7 @@ fun void get_reading()
                     1 => soundOn;
                     freqs4[index-1] => s.freq;
                     amps[index-1] => targetGain;
-                    spork ~ fadeIn();
+                    spork ~ e.keyOn();
                 }
                 else if ( msg.getFloat(0) < thresh2 && msg.getFloat(0) > 0.0)
                 {
@@ -104,13 +95,13 @@ fun void get_reading()
                     1 => soundOn;
                     freqs3[index-1] => s.freq;
                     amps[index-1]*0.5 => targetGain;
-                    spork ~ fadeIn();
+                    spork ~ e.keyOn();
                 }   
                 else
                 {
                     0 => soundOn;
                     0.0 => targetGain;
-                    spork ~ fadeOut();
+                    spork ~ e.keyOff();
                 }
             }
         }
