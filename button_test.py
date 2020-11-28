@@ -2,9 +2,11 @@ import os
 import RPi.GPIO as GPIO
 from time import sleep
 
+# Hifiberry Miniamp uses GPIO pins 16, 18, 19, 20, 21, 26
+
 button_state = "OFF"
-button_pin = 16
-led_pin = 18
+button_pin = 12
+led_pin = 17
 
 def button_callback(channel):
     print("BUTTON PRESS")
