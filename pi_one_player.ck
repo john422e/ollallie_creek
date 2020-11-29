@@ -24,6 +24,14 @@ SinOsc s => Envelope e => LPF f1 => BRF f2 => dac;
 600 => f2.freq;
 0.1 => f2.Q;
 
+for ( 0 => int i; s.freq() < 1100; i++ ) {
+    e.keyOn();
+    <<< s.freq() >>>;
+    0.25::second => now;
+    e.keyOff();
+    s.freq() + 25 => s.freq;
+}
+
 // initialize volume
 //0 => s.gain;
 
@@ -58,8 +66,8 @@ for( 0 => int i; i < countDown; i++ ) {
 
 0 => int index; // freq array index
 0 => int soundOn; // switch for sound (0 or 1)
-5.0 => float thresh1; // distance threshold (lower than values trigger sound)
-10.0 => float thresh2; // distance threshold (lower than values trigger sound)
+10.0 => float thresh1; // distance threshold (lower than values trigger sound)
+20.0 => float thresh2; // distance threshold (lower than values trigger sound)
 
 // adjust starting position if command line argument present
 Std.atoi(me.arg(0)) => index; // user provides section number (same as index value)
