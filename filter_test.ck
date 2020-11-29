@@ -1,4 +1,4 @@
-SinOsc s => Envelope e => dac; LPF f1 => BRF f2 => dac;
+SinOsc s => Envelope e => LPF f1 => BRF f2 => dac;
 
 50 => s.freq;
 250 => f1.freq;
