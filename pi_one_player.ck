@@ -16,7 +16,7 @@ in.listenAll();
 SinOsc s => Envelope e => LPF f1 => BRF f2 => dac;
 
 // because of distortion 
-dac.gain(0.9); // is this too high?
+//dac.gain(0.9); // is this too high?
 
 // setup filters
 250 => f1.freq;
@@ -66,11 +66,6 @@ Std.atoi(me.arg(0)) => index; // user provides section number (same as index val
 times[index] => second_i; // sets second_i from index
 <<< "start at index:", index, "second:", second_i >>>;
 
-// gain variables
-0.0 => float targetGain;
-0.0 => float gainPosition;
-0.005 => float gainInc;
-
 // functions
 fun void get_reading()
 {
@@ -101,7 +96,6 @@ fun void get_reading()
                 else
                 {
                     0 => soundOn;
-                    0.0 => s.gain;
                     spork ~ e.keyOff();
                 }
             }
