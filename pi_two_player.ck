@@ -13,16 +13,15 @@ OscMsg msg;
 in.listenAll();
 
 // sound network
-SinOsc s => Envelope e => LPF f1 => BRF f2 => dac;
+SinOsc s => Envelope e => LPF f => dac;
 
 // because of distortion 
-dac.gain(0.9); // is this too high?
+//dac.gain(0.9); // is this too high?
 
 // setup filters
-250 => f1.freq;
-0.1 => f1.Q;
-600 => f2.freq;
-0.1 => f2.Q;
+500 => f.freq;
+0.4 => f.Q;
+
 
 // initialize volume
 //0 => s.gain;
@@ -48,8 +47,6 @@ for( 0 => int i; i < countDown; i++ ) {
 //[896.35,  896.35,  967.15,  768.33,  1086.66, 932.6,  992.07,  1073.35, 744.26,  1078.73, 755.43,  755.43] @=> float freqs2[];
 [448.88,  448.88,  379.21,  538.94,  977.06,  839.42, 868.88,  492.78,  420.84,  648.54,  677.2,   677.2] @=> float freqs3[];
 [372.7,   372.7,   338.71,  517.7,   869.16,  446.9,  385.73,  431.04,  371.28,  432.74,  453.18,  453.18] @=> float freqs4[];
-// amplitude array
-[0.0,     0.85,    0.7,     0.7,     0.85,    0.85,    0.85,    0.0,    0.73,    0.0,     0.87,    0.0] @=> float amps[];
 // timing array
 [0,       30,      90,      150,     210,     270,     330,     390,    450,     510,     570,     630] @=> int times[]; // 26 timing markers
 
@@ -60,19 +57,14 @@ for( 0 => int i; i < countDown; i++ ) {
 
 0 => int index; // freq array index
 0 => int soundOn; // switch for sound (0 or 1)
-5.0 => float thresh1; // distance threshold (lower than values trigger sound)
-10.0 => float thresh2; // distance threshold (lower than values trigger sound)
+10.0 => float thresh1; // distance threshold (lower than values trigger sound)
+20.0 => float thresh2; // distance threshold (lower than values trigger sound)
 
 
 // adjust starting position if command line argument present
 Std.atoi(me.arg(0)) => index; // user provides section number (same as index value)
 times[index] => second_i; // sets second_i from index
 <<< "start at index:", index, "second:", second_i >>>;
-
-// gain variables
-0.0 => float targetGain;
-0.0 => float gainPosition;
-0.005 => float gainInc;
 
 // functions
 fun void get_reading()
@@ -92,7 +84,6 @@ fun void get_reading()
                     //<<< "sound on!" >>>;
                     1 => soundOn;
                     freqs4[index-1] => s.freq;
-                    amps[index-1] => targetGain;
                     spork ~ e.keyOn();
                 }
                 else if ( msg.getFloat(0) < thresh2 && msg.getFloat(0) > 0.0)
@@ -100,13 +91,11 @@ fun void get_reading()
                     //<<< "sound on!" >>>;
                     1 => soundOn;
                     freqs3[index-1] => s.freq;
-                    amps[index-1]*0.5 => targetGain;
                     spork ~ e.keyOn();
                 }   
                 else
                 {
                     0 => soundOn;
-                    0.0 => targetGain;
                     spork ~ e.keyOff();
                 }
             }
@@ -129,7 +118,7 @@ while( second_i <= end )
     if( times[index] == second_i ) // only gets triggered at each timing interval
     {
         freqs3[index] => s.freq;
-        <<< "Time: ", times[index], "Freq:", freqs3[index], "Target Gain:", amps[index] >>>;
+        <<< "Time: ", times[index], "Freq:", freqs3[index] >>>;
         if( index < times.cap()-1 )
         {
             index++;

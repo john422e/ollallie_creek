@@ -13,24 +13,15 @@ OscMsg msg;
 in.listenAll();
 
 // sound network
-SinOsc s => Envelope e => LPF f1 => dac;//BRF f2 => dac;
+SinOsc s => Envelope e => LPF f => dac;
 
 // because of distortion 
 //dac.gain(0.9); // is this too high?
 
 // setup filters
-250 => f1.freq;
-0.1 => f1.Q;
-600 => f2.freq;
-0.9 => f2.Q;
+500 => f.freq;
+0.4 => f.Q;
 
-for ( 0 => int i; s.freq() < 1100; i++ ) {
-    e.keyOn();
-    <<< s.freq() >>>;
-    0.25::second => now;
-    e.keyOff();
-    s.freq() + 25 => s.freq;
-}
 
 // initialize volume
 //0 => s.gain;
