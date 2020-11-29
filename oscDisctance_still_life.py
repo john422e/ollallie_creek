@@ -68,7 +68,7 @@ def send_reading(reading):
 
     # sends distance back to host
     client.send(packet)
-    #print("sending", "/distance", reading)
+    print("sending", "/distance", reading)
 
 # MAIN PROGRAM
 if __name__ == "__main__":
