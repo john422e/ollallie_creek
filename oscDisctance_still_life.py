@@ -68,7 +68,7 @@ def send_reading(reading):
 
     # sends distance back to host
     client.send(packet)
-    print("sending", "/distance", reading)
+    #print("sending", "/distance", reading)
 
 # MAIN PROGRAM
 if __name__ == "__main__":
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     # loop which gets and sends reading
     while True:
         reading = get_reading()
-        print(reading)
+        #print(reading)
         if reading > 0:
             # to smooth out readings
             averaged = reading + last_reading / 2
