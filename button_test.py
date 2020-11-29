@@ -1,4 +1,4 @@
-import os
+import subprocess
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -17,7 +17,9 @@ def button_callback(channel):
         print("LIGHT ON")
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
-        os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
+        subprocess.run("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
+        #os.system("python3 /home/pi/git/still_life/ollallie_creek/oscDistance_still_life.py &")
+        #os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
     else:
         print("LIGHT OFF")
         GPIO.output(led_pin, GPIO.LOW)
