@@ -8,6 +8,8 @@ button_state = "OFF"
 button_pin = 12
 led_pin = 17
 
+ultrasonic, chuck = None, None
+
 def button_callback(channel):
     print("BUTTON PRESS")
     global button_state
@@ -18,7 +20,7 @@ def button_callback(channel):
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
         #result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
-        ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py", "&"])#, check=True)
+        ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"])#, check=True)
         chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1", "&"])
         sleep(1)
         print(ultrasonic, chuck)
