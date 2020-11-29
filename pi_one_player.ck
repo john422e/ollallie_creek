@@ -48,8 +48,6 @@ for( 0 => int i; i < countDown; i++ ) {
 [896.35,  896.35,  967.15,  768.33,  1086.66, 932.6,  992.07,  1073.35, 744.26,  1078.73, 755.43,  755.43] @=> float freqs2[];
 //[448.88,  448.88,  379.21,  538.94,  977.06,  839.42, 868.88,  492.78,  420.84,  648.54,  677.2,   677.2] @=> float freqs3[];
 //[372.7,   372.7,   338.71,  517.7,   869.16,  446.9,  385.73,  431.04,  371.28,  432.74,  453.18,  453.18] @=> float freqs4[];
-// amplitude array
-[0.0,     0.85,    0.7,     0.7,     0.85,    0.85,    0.85,    0.0,    0.73,    0.0,     0.87,    0.0] @=> float amps[];
 // timing array
 [0,       30,      90,      150,     210,     270,     330,     390,    450,     510,     570,     630] @=> int times[]; // 26 timing markers
 
@@ -91,7 +89,6 @@ fun void get_reading()
                     //<<< "sound on!" >>>;
                     1 => soundOn;
                     freqs1[index-1] => s.freq;
-                    amps[index-1] => s.gain; // index-1?
                     spork ~ e.keyOn();
                 }
                 else if ( msg.getFloat(0) < thresh2 && msg.getFloat(0) > 0.0)
@@ -99,7 +96,6 @@ fun void get_reading()
                     <<< "sound on!" >>>;
                     //1 => soundOn;
                     //freqs2[index-1] => s.freq;
-                    //amps[index-1]*0.5 => targetGain;
                     //spork ~ e.keyOn();
                 }   
                 else
@@ -128,7 +124,7 @@ while( second_i <= end )
     if( times[index] == second_i ) // only gets triggered at each timing interval
     {
         freqs1[index] => s.freq;
-        <<< "Time: ", times[index], "Freq:", freqs1[index], "Target Gain:", amps[index] >>>;
+        <<< "Time: ", times[index], "Freq:", freqs1[index]>>>;
         if( index < times.cap()-1 )
         {
             index++;
