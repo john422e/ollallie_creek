@@ -19,14 +19,19 @@ def button_callback(channel):
         button_state = "ON"
         #result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
         result = subprocess.Popen( ["python3", "ultrasonic_test.py"])#, check=True)
+        result2 = subprocess.Popen( ["chuck", "pi_one_player.ck:1"])
         sleep(1)
-        print(result)
+        print(result, result2)
         #subprocess.run("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
         #os.system("python3 /home/pi/git/still_life/ollallie_creek/oscDistance_still_life.py &")
         #os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
     else:
         print("LIGHT OFF")
         GPIO.output(led_pin, GPIO.LOW)
+        try:
+            print(result, result2)
+        except:
+            pass
         button_state = "OFF"
 
 #callback_lambda = lambda x: button_callback(x, button_state)
