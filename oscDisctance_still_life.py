@@ -102,3 +102,4 @@ if __name__ == "__main__":
             last_reading = reading
 
         time.sleep(.1)
+        # sleep 
