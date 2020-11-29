@@ -22,7 +22,7 @@ SinOsc s => Envelope e => LPF f1 => BRF f2 => dac;
 250 => f1.freq;
 0.1 => f1.Q;
 600 => f2.freq;
-0.1 => f2.Q;
+0.9 => f2.Q;
 
 for ( 0 => int i; s.freq() < 1100; i++ ) {
     e.keyOn();
