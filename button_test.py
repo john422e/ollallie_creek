@@ -26,13 +26,12 @@ def button_callback(channel):
         print(ultrasonic, chuck)
         ultrasonic.kill()
         chuck.kill()
-        #subprocess.run("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
-        #os.system("python3 /home/pi/git/still_life/ollallie_creek/oscDistance_still_life.py &")
-        #os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
     else:
         print("LIGHT OFF")
-        #ultrasonic.terminate()
-        #chuck.terminate()
+        if ultrasonic:
+            ultrasonic.terminate()
+        if chuck:
+            chuck.terminate()
         GPIO.output(led_pin, GPIO.LOW)
         try:
             print(result, result2)
