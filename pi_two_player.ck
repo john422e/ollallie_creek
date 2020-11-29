@@ -58,7 +58,7 @@ for( 0 => int i; i < countDown; i++ ) {
 0 => int index; // freq array index
 0 => int soundOn; // switch for sound (0 or 1)
 10.0 => float thresh1; // distance threshold (lower than values trigger sound)
-20.0 => float thresh2; // distance threshold (lower than values trigger sound)
+30.0 => float thresh2; // distance threshold (lower than values trigger sound)
 
 
 // adjust starting position if command line argument present
