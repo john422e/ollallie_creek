@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, os
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -7,8 +7,6 @@ from time import sleep
 button_state = "OFF"
 button_pin = 12
 led_pin = 17
-
-ultrasonic, chuck = None, None
 
 def button_callback(channel):
     print("BUTTON PRESS")
@@ -20,18 +18,13 @@ def button_callback(channel):
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
         #result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
-        ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"])#, check=True)
-        chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1", "&"])
-        sleep(10)
-        print(ultrasonic, chuck)
-        ultrasonic.kill()
-        chuck.kill()
+        ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
+        chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1"], preexec_fn=os.setsid)
+
     else:
         print("LIGHT OFF")
-        if ultrasonic:
-            ultrasonic.terminate()
-        if chuck:
-            chuck.terminate()
+        kill_python = subprocess.Popen( ["pkill", "python3"])
+        kill_chuck = subprocess.Popen( ["pkill", "chuck"])
         GPIO.output(led_pin, GPIO.LOW)
         try:
             print(result, result2)
