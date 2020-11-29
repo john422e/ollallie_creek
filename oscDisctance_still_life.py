@@ -93,7 +93,7 @@ if __name__ == "__main__":
     # loop which gets and sends reading
     while True:
         reading = get_reading()
-
+        print(reading)
         if reading > 0:
             # to smooth out readings
             averaged = reading + last_reading / 2
