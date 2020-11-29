@@ -89,9 +89,9 @@ fun void get_reading()
                 else if ( msg.getFloat(0) < thresh2 && msg.getFloat(0) > 0.0)
                 {
                     <<< "sound on!" >>>;
-                    //1 => soundOn;
-                    //freqs2[index-1] => s.freq;
-                    //spork ~ e.keyOn();
+                    1 => soundOn;
+                    freqs2[index-1] => s.freq;
+                    spork ~ e.keyOn();
                 }   
                 else
                 {
