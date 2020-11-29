@@ -17,7 +17,10 @@ def button_callback(channel):
         print("LIGHT ON")
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
-        subprocess.run("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
+        result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
+        sleep(1)
+        print(result)
+        #subprocess.run("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
         #os.system("python3 /home/pi/git/still_life/ollallie_creek/oscDistance_still_life.py &")
         #os.system("chuck --srate:22050 --adaptive:256 /home/pi/git/still_life/ollallie_creek/test.ck &")
     else:
@@ -46,7 +49,7 @@ sleep(1)
 GPIO.add_event_detect(button_pin, GPIO.RISING, callback=button_callback, bouncetime=200)
 
 time = 1
-while time < 60:
+while time < 600:
 	sleep(1)
 	time += 1
 #message = input("Press enter to quit \n\n") # run until someone presses enter
