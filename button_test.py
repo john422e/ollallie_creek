@@ -30,6 +30,7 @@ def button_callback(channel):
 
     else:
         print("LIGHT OFF")
+        print(test_var)
         #ultrasonic.kill()
         #kill_python = subprocess.Popen( ["pkill", "python3"])
         #kill_chuck = subprocess.Popen( ["pkill", "chuck"])
