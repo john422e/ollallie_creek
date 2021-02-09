@@ -25,9 +25,10 @@ def button_callback(channel):
         print("LIGHT ON")
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
-        ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
+        #ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
+        ultrasonic = subprocess.Popen( ["python3", "oscDistance_still_life.py"], preexec_fn=os.setsid)#, check=True)
         #noise = subprocess.Popen( ["chuck", "long_test.ck"], preexec_fn=os.setsid)
-        chuck = subprocess.Popen( ["chuck", "sensor_test.ck:1"], preexec_fn=os.setsid)
+        chuck = subprocess.Popen( ["chuck", "sensor_test.ck"], preexec_fn=os.setsid)
         #test_var = randint(10, 20)
         #print(test_var)
         #chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1"], preexec_fn=os.setsid)
