@@ -3,6 +3,8 @@ from threading import Thread
 import RPi.GPIO as GPIO
 from time import sleep
 
+from random import randint
+
 # Hifiberry Miniamp uses GPIO pins 16, 18, 19, 20, 21, 26
 
 button_state = "OFF"
@@ -19,13 +21,14 @@ def button_callback(channel):
         GPIO.output(led_pin, GPIO.HIGH)
         button_state = "ON"
         #result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
-        ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
+        #ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
+        led_pin = randint(20)
         print(led_pin)
         #chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1"], preexec_fn=os.setsid)
 
     else:
         print("LIGHT OFF")
-        ultrasonic.kill()
+        #ultrasonic.kill()
         #kill_python = subprocess.Popen( ["pkill", "python3"])
         #kill_chuck = subprocess.Popen( ["pkill", "chuck"])
         GPIO.output(led_pin, GPIO.LOW)
