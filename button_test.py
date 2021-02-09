@@ -31,7 +31,7 @@ def button_callback(channel):
         #ultrasonic.kill()
         #kill_python = subprocess.Popen( ["pkill", "python3"])
         #kill_chuck = subprocess.Popen( ["pkill", "chuck"])
-        GPIO.output(led_pin, GPIO.LOW)
+        #GPIO.output(led_pin, GPIO.LOW)
         try:
             print(result, result2)
         except:
