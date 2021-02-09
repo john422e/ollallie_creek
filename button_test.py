@@ -17,6 +17,7 @@ def button_callback(channel):
     print("BUTTON PRESS")
     global button_state
     global led_pin
+    global test_var
 
     if button_state == "OFF":
         print("LIGHT ON")
