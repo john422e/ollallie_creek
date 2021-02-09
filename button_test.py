@@ -11,6 +11,8 @@ button_state = "OFF"
 button_pin = 12
 led_pin = 17
 
+test_var = 0
+
 def button_callback(channel):
     print("BUTTON PRESS")
     global button_state
@@ -22,8 +24,8 @@ def button_callback(channel):
         button_state = "ON"
         #result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
         #ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
-        led_pin = randint(10, 20)
-        print(led_pin)
+        test_var = randint(10, 20)
+        print(test_var)
         #chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1"], preexec_fn=os.setsid)
 
     else:
@@ -31,7 +33,7 @@ def button_callback(channel):
         #ultrasonic.kill()
         #kill_python = subprocess.Popen( ["pkill", "python3"])
         #kill_chuck = subprocess.Popen( ["pkill", "chuck"])
-        #GPIO.output(led_pin, GPIO.LOW)
+        GPIO.output(led_pin, GPIO.LOW)
         try:
             print(result, result2)
         except:
