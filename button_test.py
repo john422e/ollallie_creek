@@ -20,7 +20,7 @@ def button_callback(channel):
         button_state = "ON"
         #result = subprocess.run( ["python3", "ultrasonic_test.py"], check=True)
         ultrasonic = subprocess.Popen( ["python3", "ultrasonic_test.py"], preexec_fn=os.setsid)#, check=True)
-        print(ultrasonic)
+        print(led_pin)
         #chuck = subprocess.Popen( ["chuck", "pi_one_player.ck:1"], preexec_fn=os.setsid)
 
     else:
