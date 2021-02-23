@@ -65,7 +65,18 @@ Std.atoi(me.arg(0)) => index; // user provides section number (same as index val
 times[index] => second_i; // sets second_i from index
 <<< "start at index:", index, "second:", second_i >>>;
 
+0.0 => float last_reading;
+
 // functions
+
+// to average new sensor readings with last one
+fun float smooth_vals( float new_reading ) {
+    (last_reading + new_reading) * 0.5 => float smoothed;
+    //<<< last_reading, new_reading, smoothed >>>;
+    new_reading => last_reading;
+    return smoothed;
+}
+
 fun void get_reading()
 {
     while( second_i <= end )
